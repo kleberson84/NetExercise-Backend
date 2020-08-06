@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetExercise.BLL.Services.Abstract;
+using NetExercise.Web.API.Extensions;
 using NetExercise.Web.API.Models;
 
 namespace NetExercise.Web.API.Controllers
@@ -19,20 +20,16 @@ namespace NetExercise.Web.API.Controllers
         [Route("xml")]
         public TextWebModel ConvertToXml([FromBody] TextWebModel textWebModel)
         {
-            return new TextWebModel
-            {
-                Content = _convertService.ConvertToXml(textWebModel.Content)
-            };
+            return _convertService.ConvertToXml(textWebModel.Content)
+                .ToTextWebModel();
         }
 
         [HttpPost]
         [Route("csv")]
         public TextWebModel ConvertToCsv([FromBody] TextWebModel textWebModel)
         {
-            return new TextWebModel
-            {
-                Content = _convertService.ConvertToCsv(textWebModel.Content)
-            };
+            return _convertService.ConvertToCsv(textWebModel.Content)
+                .ToTextWebModel();
         }
     }
 }
