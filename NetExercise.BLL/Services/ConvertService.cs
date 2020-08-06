@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using NetExercise.BLL.Extensions;
@@ -9,6 +10,8 @@ namespace NetExercise.BLL.Services
 {
     internal class ConvertService : IConvertService
     {
+        private const string CsvSeparator = ", ";
+
         public string ConvertToXml(string text)
         {
             var model = text.ToTextModel();
@@ -35,7 +38,39 @@ namespace NetExercise.BLL.Services
         {
             var model = text.ToTextModel();
 
-            return text;
+            try
+            {
+                using var stringWriter = new EncodedStringWriter(Encoding.UTF8);
+
+                var longestSentence = model
+                    .Sentences
+                    .Max(s => s.Words.Count);
+
+                var words = Enumerable.Range(1, longestSentence)
+                    .Select(i => $"Word {i}")
+                    .ToList();
+                stringWriter.WriteLine(string.Join(CsvSeparator, words));
+
+                var lines = Enumerable.Range(1, model.Sentences.Count)
+                    .Select(i =>
+                    {
+                        words = model.Sentences[i - 1].Words;
+
+                        return $"Sentence {i}, {string.Join(CsvSeparator, words)}";
+                    })
+                    .ToList();
+
+                foreach (var line in lines)
+                {
+                    stringWriter.WriteLine(line);
+                }
+
+                return stringWriter.ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error during converting text to CSV format: {e.Message}");
+            }
         }
     }
 }
