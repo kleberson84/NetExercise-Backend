@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using NetExercise.BLL.Services.Abstract;
 using NetExercise.Web.API.Extensions;
 using NetExercise.Web.API.Models;
@@ -18,18 +19,42 @@ namespace NetExercise.Web.API.Controllers
 
         [HttpPost]
         [Route("xml")]
-        public TextWebModel ConvertToXml([FromBody] TextWebModel textWebModel)
+        public IActionResult ConvertToXml([FromBody] TextWebModel textWebModel)
         {
-            return _convertService.ConvertToXml(textWebModel.Content)
-                .ToTextWebModel();
+            if (string.IsNullOrWhiteSpace(textWebModel.Content) || !textWebModel.IsValid())
+            {
+                return BadRequest( new { error = "This field can contain letters, digits, comma and dot characters and can't be empty" });
+            }
+
+            var result = _convertService.ConvertToXml(textWebModel.Content);
+
+            if (result.Failure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    new { error = result.Error });
+            }
+
+            return Ok(result.Value.ToTextWebModel());
         }
 
         [HttpPost]
         [Route("csv")]
-        public TextWebModel ConvertToCsv([FromBody] TextWebModel textWebModel)
+        public IActionResult ConvertToCsv([FromBody] TextWebModel textWebModel)
         {
-            return _convertService.ConvertToCsv(textWebModel.Content)
-                .ToTextWebModel();
+            if (string.IsNullOrWhiteSpace(textWebModel.Content) || !textWebModel.IsValid())
+            {
+                return BadRequest(new { error = "This field can contain letters, digits, comma and dot characters and can't be empty" });
+            }
+
+            var result = _convertService.ConvertToCsv(textWebModel.Content);
+
+            if (result.Failure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    new { error = result.Error });
+            }
+
+            return Ok(result.Value.ToTextWebModel());
         }
     }
 }

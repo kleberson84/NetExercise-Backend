@@ -1,8 +1,10 @@
-﻿namespace NetExercise.BLL.Services.Abstract
+﻿using NetExercise.BLL.Utils;
+
+namespace NetExercise.BLL.Services.Abstract
 {
     public interface IConvertService
     {
-        string ConvertToXml(string text);
-        string ConvertToCsv(string text);
+        Result<string> ConvertToXml(string text);
+        Result<string> ConvertToCsv(string text);
     }
 }

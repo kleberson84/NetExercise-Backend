@@ -12,7 +12,7 @@ namespace NetExercise.BLL.Services
     {
         private const string CsvSeparator = ", ";
 
-        public string ConvertToXml(string text)
+        public Result<string> ConvertToXml(string text)
         {
             var model = text.ToTextModel();
 
@@ -26,15 +26,15 @@ namespace NetExercise.BLL.Services
                 var xmlSerializer = new XmlSerializer(model.GetType());
                 xmlSerializer.Serialize(stringWriter, model, xmlNamespaces);
 
-                return stringWriter.ToString();
+                return Result.Ok(stringWriter.ToString());
             }
             catch (Exception e)
             {
-                throw new Exception($"Error during converting text to XML format: {e.Message}");
+                return Result.Fail<string>( $"Error during converting text to XML format: {e.Message}");
             }
         }
 
-        public string ConvertToCsv(string text)
+        public Result<string> ConvertToCsv(string text)
         {
             var model = text.ToTextModel();
 
@@ -65,11 +65,11 @@ namespace NetExercise.BLL.Services
                     stringWriter.WriteLine(line);
                 }
 
-                return stringWriter.ToString();
+                return Result.Ok(stringWriter.ToString());
             }
             catch (Exception e)
             {
-                throw new Exception($"Error during converting text to CSV format: {e.Message}");
+                return Result.Fail<string>($"Error during converting text to CSV format: {e.Message}");
             }
         }
     }
