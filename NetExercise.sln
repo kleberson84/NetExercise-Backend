@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetExercise.Web", "NetExercise.Web\NetExercise.Web.csproj", "{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetExercise.Web", "NetExercise.Web\NetExercise.Web.csproj", "{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6FE5A329-C17D-4921-A4A8-910FC7BB3424} = {6FE5A329-C17D-4921-A4A8-910FC7BB3424}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetExercise.BLL", "NetExercise.BLL\NetExercise.BLL.csproj", "{6FE5A329-C17D-4921-A4A8-910FC7BB3424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetExercise.BLL", "NetExercise.BLL\NetExercise.BLL.csproj", "{6FE5A329-C17D-4921-A4A8-910FC7BB3424}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
