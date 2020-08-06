@@ -22,6 +22,7 @@ namespace NetExercise.Web
         {
             services.AddControllers();
             services.AddOptions();
+            services.AddCors();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -36,6 +37,11 @@ namespace NetExercise.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
 
             app.UseRouting();
 
