@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetExercise.Web", "NetExercise.Web\NetExercise.Web.csproj", "{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetExercise.BLL", "NetExercise.BLL\NetExercise.BLL.csproj", "{6FE5A329-C17D-4921-A4A8-910FC7BB3424}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DD54A9-6AAF-4D40-9E31-8F27AF3355C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FE5A329-C17D-4921-A4A8-910FC7BB3424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE5A329-C17D-4921-A4A8-910FC7BB3424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE5A329-C17D-4921-A4A8-910FC7BB3424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE5A329-C17D-4921-A4A8-910FC7BB3424}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42AB28B0-9804-437D-BD12-71548E187284}
+	EndGlobalSection
+EndGlobal
