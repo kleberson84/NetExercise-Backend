@@ -12,7 +12,7 @@ namespace NetExercise.BLL.Extensions
         {
             return sentences.Select(s =>
                 {
-                    var words = Regex.Replace(s, "[,\n]", String.Empty)
+                    var words = Regex.Replace(s, "[,\n]", " ")
                         .Trim()
                         .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                         .ToList();
