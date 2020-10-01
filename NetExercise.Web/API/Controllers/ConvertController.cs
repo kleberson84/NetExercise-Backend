@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetExercise.BLL.Services.Abstract;
-using NetExercise.Web.API.Extensions;
 using NetExercise.Web.API.Models;
+using NetExercise.Web.API.Validators;
 
 namespace NetExercise.Web.API.Controllers
 {
@@ -34,7 +34,7 @@ namespace NetExercise.Web.API.Controllers
                     new { error = result.Error });
             }
 
-            return Ok(result.Value.ToTextWebModel());
+            return Ok(new TextWebModel { Content = result.Value });
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace NetExercise.Web.API.Controllers
                     new { error = result.Error });
             }
 
-            return Ok(result.Value.ToTextWebModel());
+            return Ok(new TextWebModel { Content = result.Value });
         }
     }
 }

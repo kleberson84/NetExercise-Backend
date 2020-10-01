@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-using NetExercise.BLL.Extensions;
+using NetExercise.BLL.Models;
 using NetExercise.BLL.Services.Abstract;
 using NetExercise.BLL.Utils;
 
@@ -14,7 +16,7 @@ namespace NetExercise.BLL.Services
 
         public Result<string> ConvertToXml(string text)
         {
-            var model = text.ToTextModel();
+            var model = ParseToTextModel(text);
 
             try
             {
@@ -36,7 +38,7 @@ namespace NetExercise.BLL.Services
 
         public Result<string> ConvertToCsv(string text)
         {
-            var model = text.ToTextModel();
+            var model = ParseToTextModel(text);
 
             try
             {
@@ -71,6 +73,38 @@ namespace NetExercise.BLL.Services
             {
                 return Result.Fail<string>($"Error during converting text to CSV format: {e.Message}");
             }
+        }
+
+        private TextModel ParseToTextModel(string text)
+        {
+            var sentencesList = text
+                .Trim()
+                .Split('.', StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+            return new TextModel
+            {
+                Sentences = ParseToSentenceModels(sentencesList)
+            };
+        }
+
+        private List<SentenceModel> ParseToSentenceModels(List<string> sentences)
+        {
+            return sentences
+                .Select(s =>
+                {
+                    var words = Regex.Replace(s, "[,\r\n]", " ")
+                        .Trim()
+                        .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                        .ToList();
+                    words.Sort();
+
+                    return new SentenceModel
+                    {
+                        Words = words
+                    };
+                })
+                .ToList();
         }
     }
 }
