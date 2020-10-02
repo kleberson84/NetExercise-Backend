@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using NetExercise.BLL.Models;
@@ -20,7 +20,7 @@ namespace NetExercise.BLL.Services
 
             try
             {
-                using var stringWriter = new EncodedStringWriter(Encoding.UTF8);
+                using var stringWriter = new StringWriter();
 
                 var xmlNamespaces = new XmlSerializerNamespaces();
                 xmlNamespaces.Add("", "");
@@ -40,9 +40,14 @@ namespace NetExercise.BLL.Services
         {
             var model = ParseToTextModel(text);
 
+            if (!model.Sentences.Any())
+            {
+                return Result.Ok(string.Empty);
+            }
+
             try
             {
-                using var stringWriter = new EncodedStringWriter(Encoding.UTF8);
+                using var stringWriter = new StringWriter();
 
                 var longestSentence = model
                     .Sentences
