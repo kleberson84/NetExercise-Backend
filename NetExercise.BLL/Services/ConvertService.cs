@@ -10,7 +10,7 @@ using NetExercise.BLL.Utils;
 
 namespace NetExercise.BLL.Services
 {
-    internal class ConvertService : IConvertService
+    public class ConvertService : IConvertService
     {
         private const string CsvSeparator = ", ";
 
